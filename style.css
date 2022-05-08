@@ -9,7 +9,9 @@
     position: fixed;
     backdrop-filter: blur(5px);
     top: 0;
+    bottom: 0;
     left: 0;
+    right: 0;
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s linear;
@@ -68,8 +70,175 @@
     cursor: pointer;
 
 }
+/*=============================*/
+
+
+.burger_btn.open > .burger_line{
+    background: black;
+    z-index: 101;
+}
+
+.burger_btn.open > .burger_line:first-child{
+    transform: rotate(-383deg) translate(-5px, 10.5px);
+    width: 55%;
+    animation: burger_line 1s;
+}
+
+.burger_btn.open > .burger_line:last-child{
+    transform: rotate(383deg) translate(-5px, -10.5px);
+    width: 55%;
+    animation: burger_line 1s;
+}
+
+.burger_btn.open > .burger_line:nth-child(2){
+    transform:  rotate(360deg);
+    width: 75%;
+    animation: burger_line 1s;
+    
+}
+
+@keyframes burger_line{
+
+    50%{
+        background-color: tomato;
+    }
+
+    100%{
+        background-color: black;
+    }
+}
+
+.burger_line{
+    background-color: white;
+    height: 4px;
+    width: 100%;
+    transition: all 1s;
+}
+
+.burger_menu{
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    position: fixed;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.6s;
+}
+
+.header_links_burger{
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    transition: all 0.3s;
+    margin-left: 14px;
+}
+
+.header_links_burger:first-child{
+    margin-top: 28px;
+}
+
+.burger_menu.open{
+    display: flex;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.6s;
+}
+
+.burger_btn{
+    display: none;
+    cursor: pointer;
+    width: 70px;
+    flex-direction: column;
+    row-gap: 14px;
+    background: transparent;
+    z-index: 101;
+    transition: all 0.6s;
+}
+
+/*==============================*/
+
+.swiper {
+    width: 100%;
+    display: none;
+    padding: 40px 0;
+    z-index: -1;
+}
+
+.swiper-slide{
+    margin: 0 auto;
+}
+
+.swiper-wrapper{
+    margin: 0 auto;
+}
+
+.swiper-slide > .galery_photo{
+    margin: 0 auto;
+}
+
+.swiper-button-next > svg, .swiper-button-prev > svg{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.swiper-button-next > svg > g > path, .swiper-button-prev > svg > g > path{
+    transition: stroke .05s linear;
+}
+
+.swiper-button-next > svg:active > g > path, .swiper-button-prev > svg:active > g > path{
+    stroke: #6f88a0;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    top: 50%;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 40px;
+    transition: all .2s linear;
+}
+
+.swiper-button-next:active, .swiper-button-prev:active{
+    background-color: rgba(0, 0, 0, 0.318);
+}
+
+.swiper-button-next > svg, .swiper-button-prev > svg{
+    transform: translateX(3px);
+}
+
+.swiper-button-prev > svg{
+    transform: rotate(180deg) translateX(3px);
+}
+
+.swiper_bg{
+    background-image: url(assets/swiper_bg.png);
+    display: none;
+    /*background-attachment: fixed;*/
+    background-position: bottom;
+    margin-top: 100px;
+    padding: 40px 0;
+    z-index: -1;
+}
+
 
 /*=============================*/
+
+.progress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 0%;
+    z-index: 100;
+    background-color: #6f88a0;
+}
 
 body{
     background-color: #1a1a1a;
@@ -82,6 +251,10 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+
+br{
+    display: none;
 }
 
 .wrapper{
@@ -123,16 +296,21 @@ header{
 .under_header{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     column-gap: 30px;
 }
 
 .under_header_block{
-    border: 5px solid #6f88a0;
+    border: 5px solid hsl(209, 21%, 53%);
     padding: 50px 30px;
 }
 
 .under_header_img{
-    max-width: 60%;
+    width: 100%;
+}
+
+.under_header_img.hide_img{
+    display: none;
 }
 
 .main_under_header_block{
@@ -169,12 +347,13 @@ header{
 }
 
 .under_header_author{
-    margin-top: 10px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: #ffffff;
     padding: 5px 0 50px 0;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: translateY(-60px);
 }
 
 .author_under_header{
@@ -226,13 +405,12 @@ header{
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 16px;
-    display: flex;
-    flex-direction: column;
-    float: right;
+
 }
 
 .block_snow_houses{
-    margin: 150px 0 150px 0;
+    max-width: 1140px;
+    margin: 150px auto 160px auto;
     padding: 150px 0 100px 0;
     background-image: url(assets/snow_houses.jpg);
     background-attachment: fixed;
@@ -241,18 +419,22 @@ header{
     height: 500px;
 }
 
+.snow_block{
+    float: right;
+}
+
 .square{
     width: 440px;
     height: 200px;
     background-color: #6f88a0;
-    transform: translate(-20px, -240px);
+    transform: translate(0, -240px);
 }
 
 .snow_houses_info_block{
     width: 400px;
     background-color: #1a1a1a;
     padding: 40px;
-    transform: translateY(-420px);
+    transform: translate(20px, -420px);
     
 }
 
@@ -363,6 +545,23 @@ header{
     font-size: 16px;
 }
 
+.special_info{
+    display: none;
+    padding: 30px 16px 0 16px;
+}
+
+.special_info_main{
+    text-align: center;
+    font-size: 26px;
+    font-family: "Roboto", sans-serif;
+    margin-left: 50%;
+}
+
+.special_info_second{
+    margin-top: 15px;
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+}
 
 /*==============FLEX_IMG===========*/
 
@@ -370,15 +569,25 @@ header{
 .flex_images_block{
     margin-top: 200px;
     display: flex;
-    flex-wrap: wrap;
+   justify-content: center;
+}
+
+.flex_img_block > .flex_img_block_img_container{
+    overflow: hidden;
 }
 
 .flex_img_block_img{
-    width: 226px;
+    width: 100%;
+    transition: all 0.6s;
+    overflow: hidden;
+}
+
+.flex_img_block_img:hover{
+    transform: scale(1.1, 1.1);
 }
 
 .flex_img_block_wirh_text{
-    width: 226px;
+    width: 100%;
     padding: 20px;
     background-color: #333333;
 }
@@ -453,13 +662,29 @@ header{
 }
 
 .amazing_photos_img{
+    padding-right: 16px;
     position: absolute;
     width: 550px;
     height: 350px;
     z-index: 15;
     transform: translate(550px, -120px);
+    filter: brightness(1);
+    transition: all 1s;
 }
 
+.amazing_photos_img:hover{
+    filter: brightness(.5);
+
+}
+
+.under_footer_author{
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 5px 0 50px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
 /*========FOOTER========*/
 
@@ -475,10 +700,8 @@ header{
 
 .footer_info{
     font-size: 16px;
-    width: 15%;
+    width: 25%;
 }
-
-
 
 .subscribe > .email{
     height: 40px;
@@ -534,6 +757,13 @@ footer{
 
 }
 
+.under_footer_block{
+    padding: 50px 0 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 .footer_links{
     display: flex;
@@ -562,3 +792,1511 @@ footer{
     font-size: 14px;
     color: rgba(255, 255, 255, 0.692);
 }
+
+.footer_br{
+    display: block;
+}
+
+
+/*===============MEDIA===============*/
+
+
+@media (min-width: 1024px) and (max-width: 1200px){
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        width: 58%;
+        height: 58%;
+        margin-bottom: 20px;
+    }
+
+    .under_header_block {
+        width: 40%;
+    }
+
+    .under_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 10px;
+    }
+    
+    .under_header_author {
+        margin-top: 20px;
+        font-size: 18px;
+        transform: translateY(-44px);
+    }
+
+    .galery_photo {
+        max-width: 328px;
+    }
+
+    .flex_galery{
+        justify-content: center;
+    }
+
+    .blue_desert_square {
+        width: 500px;
+        height: 540px;
+        transform: translate(40px, -20px);
+    }
+
+    .amazing_photos_block {
+        padding: 60px 100px 60px 30px;
+        max-width: 600px;
+    }
+
+    .amazing_photos_square {
+        max-width: 450px;
+        max-height: 250px;
+        transform: translate(450px, -70px);
+    }
+
+    .amazing_photos_img {
+        max-width: 450px;
+        max-height: 250px;
+        transform: translate(500px, -120px);
+    }  
+    
+    .flex_img_block_wirh_text {
+       padding: 10px;
+    }
+
+    .uder_header_flex_img{
+        display:contents ;
+    }
+
+}
+@media (min-width: 896px) and (max-width: 1023px){
+    .nav_header {
+        display: flex;
+        column-gap: 30px;
+    }
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        width: 58%;
+        height: 58%;
+        margin-bottom: 20px;
+    }
+
+    .uder_header_flex_img{
+        display:contents ;
+    }
+
+    .under_header_block {
+        width: 40%;
+    }
+
+    .under_header {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 10px;
+    }
+    
+    .under_header_author {
+        font-size: 18px;
+        transform: translateY(-44px);
+        margin-top: 10px;
+    }
+
+    .main_under_header_block{
+        font-size: 40px;
+    }
+
+    .galery_photo {
+        max-width: 366px;
+    }
+
+    .blue_desert_square {
+        width: 430px;
+        height: 470px;
+        transform: translate(40px, -20px);
+    }
+
+    .amazing_photos_block {
+        padding: 60px 100px 60px 30px;
+        max-width: 600px;
+    }
+
+    .amazing_photos_square {
+        max-width: 425px;
+        max-height: 450px;
+        transform: translate(420px, -200px);
+        background: transparent;
+    }
+
+    .amazing_photos_img {
+        max-width: 480px;
+        max-height: 280px;
+        transform: translate(400px, -170px);
+    }    
+
+    .winners_first {
+        border: 5px solid #6f88a0;
+        padding: 20px 30px 58px 20px;
+        font-size: 55px;
+        font-weight: 600;
+    }
+
+    .winners_block {
+        margin-top: 60px;
+        display: flex;
+        column-gap: 40px;
+    }
+
+    .winners_second {
+        padding: 45px 0 0 0;
+    }
+
+    .info_desert {
+        transform: translateX(-50px);
+        float: right;
+        border: 2px solid #6f88a0;
+        padding: 30px 70px 70px 70px;
+        max-width: 400px;
+        max-height: 250px;
+    }
+
+    .desert_img {
+        height: 350px;
+        width: 1200px;
+    }
+
+    .footer_block {
+        padding: 50px 0 25px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        row-gap: 40px;
+    }
+
+    .subscribe{
+        margin: 0 auto;
+    }
+
+    .footer_info {
+        font-size: 16px;
+        width: 55%;
+    }
+
+    .flex_img_block_txt_main{
+        font-style: italic;
+        text-transform: uppercase;
+        
+    }
+
+    .flex_img_block_wirh_text {
+        padding: 10px;
+     }
+/*
+     .flex_images_block{
+        margin-top: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    .flex_img_block{
+        max-width: 30%;
+    }*/
+}
+@media (min-width: 768px) and (max-width: 895px){
+
+    .nav_header {
+        display: flex;
+        column-gap: 30px;
+    }
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        max-width: 49%;
+        height: 25%;
+    }
+
+    .under_header_block {
+        width: 100%;
+    }
+
+    .under_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 30px;
+    }
+    
+    .under_header_author {
+        font-size: 18px;
+        margin-top: 30px;
+        transform: translateY(-20px);
+    }
+    
+    .galery_photo {
+        max-width: 366px;
+    }
+
+    .blue_desert_square {
+        width: 340px;
+        height: 470px;
+        transform: translate(40px, -20px);
+    }
+
+    .amazing_photos_block {
+        padding: 60px 100px 60px 30px;
+        max-width: 600px;
+    }
+
+    .amazing_photos_square {
+        max-width: 250px;
+        max-height: 350px;
+        transform: translate(420px, -160px);
+        background: transparent;
+    }
+
+    .amazing_photos_img {
+        max-width: 450px;
+        max-height: 250px;
+        transform: translate(300px, -120px);
+    }    
+
+    .winners_first {
+        border: 5px solid #6f88a0;
+        padding: 20px 30px 58px 20px;
+        font-size: 55px;
+        font-weight: 600;
+    }
+
+    .winners_block {
+        margin-top: 60px;
+        display: flex;
+        column-gap: 40px;
+    }
+
+    .winners_second {
+        padding: 45px 0 0 0;
+    }
+
+    .desert_img {
+        height: 350px;
+        width: 1200px;
+    }
+
+    .footer_block {
+        padding: 50px 0 25px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        row-gap: 40px;
+    }
+
+    .subscribe{
+        margin: 0 auto;
+    }
+
+    .footer_info {
+        font-size: 16px;
+        width: 55%;
+    }
+
+    .flex_img_block_txt_main{
+        font-style: italic;
+        text-transform: uppercase;
+        
+    }
+
+    .flex_img_block_wirh_text {
+        padding: 10px;
+     }
+
+     .flex_images_block{
+        margin-top: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    .flex_img_block{
+        max-width: 30%;
+    }
+
+    .under_header_img.hide_img{
+        display: block;
+    }
+
+    .uder_header_flex_img{
+        display: flex;
+        justify-content: space-between;
+        order: 1;
+    }
+    
+    .info_desert {
+        transform: translate(-50px, 80px);
+        float: right;
+        right: 0;
+        border: 2px solid #6f88a0;
+        padding: 30px 35px 5px 35px;
+        max-width: 300px;
+        max-height: 180px;
+        z-index: 100;
+        position: absolute;
+    }
+
+    .swiper{
+        display: flex;
+        z-index: 1000;
+    }
+
+    .swiper_bg{
+        display: flex;
+    }
+
+    .flex_galery{
+        display: none;
+    }
+
+}
+@media (min-width: 596px) and (max-width:767px){
+
+    .nav_header {
+        display: flex;
+        column-gap: 30px;
+    }
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        max-width: 49%;
+        height: 25%;
+    }
+
+    .under_header_block {
+        width: 100%;
+    }
+
+    .under_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 30px;
+    }
+    
+    .under_header_author {
+        font-size: 18px;
+        margin-top: 30px;
+        transform: translateY(-20px);
+    }
+
+    .galery_photo {
+        max-width: 366px;
+    }
+
+    .blue_desert_square {
+        width: 340px;
+        height: 470px;
+        transform: translate(40px, -20px);
+    }
+
+    .amazing_photos_block {
+        padding: 10px 50px 30px 15px;;
+        z-index: 10;
+        width: 100%;
+        background-image: url(assets/water-chepakha_shadow.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .amazing_photos_square {
+        display: none;
+    }   
+    
+    .amazing_photos_main_txt {
+        padding: 10px 0 35px 0;    
+    }
+    
+    .amazing_photos_img {
+        display: none;
+    }
+
+    .winners_first {
+        border: 5px solid #6f88a0;
+        padding: 20px 30px 30px 20px;
+        text-align: center;
+        font-size: 45px;
+        font-weight: 600;
+    }
+    
+    .winners_block {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        column-gap: 40px;
+    }
+    
+    .winners_second {
+        padding: 25px 0 0 0;
+    }
+
+    .desert_img {
+        height: 350px;
+        width: 1200px;
+    }
+
+    .footer_block {
+        padding: 50px 0 25px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        row-gap: 40px;
+    }
+
+    .subscribe{
+        margin: 0 auto;
+    }
+
+    .footer_info {
+        font-size: 16px;
+        width: 55%;
+    }
+
+    .flex_img_block_txt_main{
+        font-style: italic;
+        text-transform: uppercase;
+        
+    }
+
+    .flex_img_block_wirh_text {
+        padding: 10px;
+     }
+
+     .flex_images_block{
+        margin-top: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    .flex_img_block{
+        max-width: 30%;
+    }
+
+    .under_header_img.hide_img{
+        display: block;
+    }
+
+    .uder_header_flex_img{
+        display: flex;
+        justify-content: space-between;
+        order: 1;
+    }
+    
+    .info_desert {
+        transform: translate(-50px, 80px);
+        float: right;
+        right: 0;
+        border: 2px solid #6f88a0;
+        padding: 30px 35px 5px 35px;
+        max-width: 300px;
+        max-height: 180px;
+        z-index: 100;
+        position: absolute;
+    }
+
+    .block_snow_houses {
+        margin: 220px 0 150px 0;
+    }
+
+    .block_snow_houses {
+        margin: 220px 0 150px 0;
+    }
+
+    .block_snow_houses {
+        margin: 220px 0 150px 0;    
+    }
+    
+    .blue_desert_square{
+        display: none;
+    }
+
+    .swiper{
+        display: flex;
+        z-index: 1000;
+    }
+
+    .swiper_bg{
+        display: flex;
+    }
+
+    .flex_galery{
+        display: none;
+    }
+
+
+}
+@media (min-width: 461px) and (max-width: 595px){
+    
+    .swiper{
+        display: flex;
+        z-index: 1000;
+    }
+
+    .swiper_bg{
+        display: flex;
+    }
+
+    .swiper-slide > .galery_photo {
+        width: 60%;
+        margin: 40px auto;
+    }
+
+    br{
+        display: block;
+    }
+
+    .main_under_header_block {
+        font-size: 48px;
+    }
+
+    .burger_btn{
+        display: flex;
+    }   
+
+    .nav_header , .header_links{
+        display: none;
+    }
+    
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        max-width: 100%;
+    }
+
+    .hide_img{
+        display: none;
+    }
+
+    .under_header_block {
+        width: 100%;
+        order: -1;
+    }
+
+.under_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+.under_header_author {
+    font-size: 18px;
+    margin-top: 30px;
+    transform: translateY(-20px);
+}
+
+.galery_photo {
+    max-width: 366px;
+}
+
+.blue_desert_square {
+    display: none;
+}
+
+.amazing_photos_block {
+    padding: 30px 50px 30px 15px;
+    max-width: 600px;
+    z-index: 10;
+    background-image: url(assets/water-chepakha_shadow.jpg);
+    background-attachment: fixed;
+    background-position: -200px;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.amazing_photos_square {
+    display: none;
+}   
+
+.amazing_photos_main_txt {
+    padding: 35px 0;    
+}
+
+.amazing_photos_img {
+    display: none;
+}
+
+.winners_first {
+    border: 5px solid #6f88a0;
+    padding: 20px 30px 30px 20px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.winners_block {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 40px;
+}
+
+.winners_second {
+    padding: 25px 0 0 0;
+}
+
+.snow_houses_info_block {
+    width: 340px;
+    padding: 24px;
+}
+
+.block_snow_houses {
+    margin: 220px 0 150px 0;
+}
+
+.snow_houses_blue_line {
+    width: 22%;
+}
+
+.square {
+    width: 380px;
+    height: 200px;
+}
+
+.snow_block {
+    float: none;   
+}
+
+.wrapper_snow {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.info_desert {
+    transform: translate(-50px, 130px);
+    float: right;
+    right: 0;
+    border: 2px solid #6f88a0;
+    padding: 10px;
+    width: 330px;
+    height: 140px;
+    z-index: 100;
+    position: absolute;
+}
+
+.desert_img {
+    width: 100%;
+}
+
+.footer_block {
+    padding: 50px 0 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 40px;
+}
+
+.subscribe{
+  transform: translateX(-20px);
+  margin: 0 auto;
+}
+
+.footer_info {
+    font-size: 16px;
+    width: 45%;
+}
+
+.subscribe > .email {
+    height: 40px;
+    width: 275px;
+    
+}
+
+.submit_email {
+    height: 40px;
+    width: 110px;
+}
+
+.flex_images_block{
+    margin-top: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.flex_img_block{
+    max-width: 30%;
+}
+
+.flex_img_block_wirh_text {
+    padding: 10px;
+ }
+
+ .amazing_photos_second_txt {
+    font-size: 16px;
+    margin: 30px 0 20px 0;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+.swiper{
+    display: flex;
+    z-index: 1000;
+}
+
+.flex_galery{
+    display: none;
+}
+
+}
+@media (min-width: 425px) and (max-width: 460px){
+    .flex_galery{
+        display: none;
+    }
+    
+    .swiper {
+        display: flex;
+        z-index: 1000;
+    }
+
+    .swiper_bg{
+        display: flex;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none !important;
+    }
+
+    .swiper-slide > .galery_photo {
+        width: 90%;
+        margin: 40px auto;
+    }
+
+    br{
+        display: block;
+    }
+
+    .main_under_header_block {
+        font-size: 48px;
+    }
+
+    .burger_btn{
+        display: flex;
+    }   
+
+    .nav_header , .header_links{
+        display: none;
+    }
+    
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        max-width: 100%;
+    }
+
+    .hide_img{
+        display: none;
+    }
+
+    .under_header_block {
+        width: 100%;
+        order: -1;
+    }
+
+.under_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+.under_header_author {
+    font-size: 18px;
+    margin-top: 30px;
+    transform: translateY(-20px);
+}
+
+.galery_photo {
+    max-width: 366px;
+}
+
+.blue_desert_square {
+    display: none;
+}
+
+.amazing_photos_block {
+    padding: 30px 50px 30px 15px;
+    max-width: 600px;
+    z-index: 10;
+    background-image: url(assets/water-chepakha_shadow.jpg);
+    background-attachment: fixed;
+    background-position: -200px;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.amazing_photos_square {
+    display: none;
+}   
+
+.amazing_photos_main_txt {
+    padding: 35px 0;    
+}
+
+.amazing_photos_img {
+    display: none;
+}
+
+.winners_first {
+    border: 5px solid #6f88a0;
+    padding: 20px 30px 30px 20px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.winners_block {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 40px;
+}
+
+.winners_second {
+    padding: 25px 0 0 0;
+}
+
+.snow_houses_info_block {
+    width: 340px;
+    padding: 24px;
+}
+
+.block_snow_houses {
+    margin: 220px 0 150px 0;
+}
+
+.snow_houses_blue_line {
+    width: 22%;
+}
+
+.square {
+    width: 380px;
+    height: 200px;
+}
+
+.snow_block {
+    float: none;   
+}
+
+.wrapper_snow {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.info_desert {
+    transform: translate(-50px, 130px);
+    float: right;
+    right: 0;
+    border: 2px solid #6f88a0;
+    padding: 10px;
+    width: 330px;
+    height: 140px;
+    z-index: 100;
+    position: absolute;
+}
+
+.desert_img {
+    width: 100%;
+}
+
+.footer_block {
+    padding: 50px 0 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 40px;
+}
+
+.subscribe{
+  transform: translateX(-20px);
+  margin: 0 auto;
+}
+
+.footer_info {
+    font-size: 16px;
+    width: 45%;
+}
+
+.subscribe > .email {
+    height: 40px;
+    width: 275px;
+    
+}
+
+.submit_email {
+    height: 40px;
+    width: 110px;
+}
+
+.flex_images_block{
+    margin-top: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.flex_img_block{
+    max-width: 30%;
+}
+
+.flex_img_block_wirh_text {
+    padding: 10px;
+ }
+
+ .amazing_photos_second_txt {
+    font-size: 16px;
+    margin: 30px 0 20px 0;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+}
+@media (min-width: 375px) and (max-width: 424px){
+
+    .flex_galery{
+        display: none;
+    }
+    
+    .swiper {
+        display: flex;
+        z-index: 1000;
+    }
+
+    .swiper_bg{
+        display: flex;
+    }
+
+    .swiper-slide > .galery_photo {
+        width: 60%;
+        margin: 40px auto;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none !important;
+    }
+
+    .swiper-slide > .galery_photo {
+        width: 90%;
+        margin: 40px auto;
+    }
+
+    br{
+        display: block;
+    }
+
+    .main_under_header_block {
+        font-size: 48px;
+    }
+
+    .burger_btn{
+        display: flex;
+    }   
+
+    .nav_header , .header_links{
+        display: none;
+    }
+    
+
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        max-width: 100%;
+    }
+
+    .hide_img{
+        display: none;
+    }
+
+    .under_header_block {
+        width: 100%;
+        order: -1;
+    }
+
+.under_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+.under_header_author {
+    font-size: 18px;
+    margin-top: 30px;
+    transform: translateY(-20px);
+}
+
+.galery_photo {
+    max-width: 366px;
+}
+
+.blue_desert_square {
+    display: none;
+}
+
+.amazing_photos_block {
+    padding: 30px 50px 30px 15px;
+    max-width: 600px;
+    z-index: 10;
+    background-image: url(assets/water-chepakha_shadow.jpg);
+    background-attachment: fixed;
+    background-position: -200px;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.amazing_photos_square {
+    display: none;
+}   
+
+.amazing_photos_main_txt {
+    padding: 35px 0;    
+}
+
+.amazing_photos_img {
+    display: none;
+}
+
+.winners_first {
+    border: 5px solid #6f88a0;
+    padding: 20px 30px 30px 20px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.winners_block {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 40px;
+}
+
+.winners_second {
+    padding: 25px 0 0 0;
+}
+
+.snow_houses_info_block {
+    width: 300px;
+    padding: 24px;
+}
+
+.block_snow_houses {
+    margin: 220px 0 150px 0;
+}
+
+.snow_houses_blue_line {
+    width: 22%;
+}
+
+.square {
+    width: 340px;
+    height: 200px;
+}
+
+.snow_block {
+    float: none;   
+}
+
+.wrapper_snow {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.info_desert {
+    padding: 10px;
+    width: 300px;
+    height: 140px;
+    z-index: 100;
+    position: absolute;
+    margin: 0;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 100%); 
+}
+
+.desert_img {
+    width: 100%;
+}
+
+.footer_block {
+    padding: 50px 0 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 40px;
+}
+
+.subscribe{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer_info {
+    font-size: 16px;
+    width: 45%;
+}
+
+.subscribe > .email {
+    height: 40px;
+    width: 100%;
+    transform: translateX(0);
+    
+}
+
+.submit_email {
+    height: 40px;
+    width: 120px;
+    margin: 30px auto 0 auto;
+    transform: translateX(0);
+}
+
+.flex_images_block{
+    margin-top: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.flex_img_block{
+    max-width: 50%;
+}
+
+.flex_img_block_wirh_text {
+    padding: 10px;
+ }
+
+ .amazing_photos_second_txt {
+    font-size: 16px;
+    margin: 30px 0 20px 0;
+    width: 100%;
+    letter-spacing: 1px;
+}
+}
+
+@media (min-width: 320px) and (max-width: 374px){
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none !important;
+    }
+    
+    .swiper {
+        display: flex;
+        z-index: 1000;
+    }
+
+    .flex_galery{
+        display: none;
+    }
+
+    .swiper_bg{
+        display: flex;
+    }
+
+    .swiper-slide > .galery_photo {
+        width: 90%;
+        margin: 40px auto;
+    }
+
+    br{
+        display: block;
+    }
+
+    .main_under_header_block {
+        font-size: 38px;
+    }
+
+    .burger_btn{
+        display: flex;
+    }   
+
+    .nav_header , .header_links{
+        display: none;
+    }
+    
+    .flex_img_block{
+        flex-grow: 0;
+    }
+
+    .under_header_img{
+        max-width: 100%;
+    }
+
+    .hide_img{
+        display: none;
+    }
+
+    .under_header_block {
+        width: 100%;
+        order: -1;
+    }
+
+.under_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+.under_header_author {
+    font-size: 16px;
+    margin-top: 30px;
+    transform: translateY(-20px);
+}
+
+.galery_photo {
+    max-width: 366px;
+}
+
+.blue_desert_square {
+    display: none;
+}
+
+.amazing_photos_block {
+    padding: 30px 50px 30px 15px;
+    max-width: 600px;
+    z-index: 10;
+    background-image: url(assets/water-chepakha_shadow.jpg);
+    background-attachment: fixed;
+    background-position: -200px;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.amazing_photos_square {
+    display: none;
+}   
+
+.amazing_photos_main_txt {
+    padding: 35px 0;    
+}
+
+.amazing_photos_img {
+    display: none;
+}
+
+.winners_first {
+    border: 5px solid #6f88a0;
+    padding: 20px 30px 30px 20px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.winners_block {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 40px;
+}
+
+.winners_second {
+    padding: 25px 0 0 0;
+}
+
+.snow_houses_info_block {
+    width: 260px;
+    padding: 24px;
+}
+
+.block_snow_houses {
+    margin: 150px 0 150px 0;
+}
+
+.snow_houses_blue_line {
+    width: 22%;
+}
+
+.snow_houses_second_info {
+    row-gap: 5px;
+}
+
+.square {
+    width: 300px;
+    height: 200px;
+}
+
+.snow_block {
+    float: none;   
+}
+
+.wrapper_snow {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.info_desert {
+    padding: 10px;
+    width: 300px;
+    height: 140px;
+    z-index: 100;
+    position: absolute;
+    margin: 0;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 100%); 
+}
+
+.desert_img {
+    width: 100%;
+}
+
+.no_wrapper{
+    padding: 0;
+}
+
+.footer_block {
+    padding: 50px 0 25px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    flex-grow: 1;
+}
+
+.subscribe{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer_info {
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.subscribe > .email {
+    height: 40px;
+    width: 100%;
+    transform: translateX(0);
+}
+
+.travel_with_us {
+    padding: 30px 0;
+    text-align: center;
+    width: 100%;
+}
+
+ .footer_br{
+    display: none;
+}
+
+.submit_email {
+    height: 40px;
+    width: 120px;
+    margin: 30px auto 0 auto;
+    transform: translateX(0);
+}
+
+.flex_images_block{
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.flex_img_block{
+    max-width: 50%;
+}
+
+.flex_img_block_wirh_text {
+    padding: 10px;
+ }
+
+ .amazing_photos_second_txt {
+    font-size: 16px;
+    margin: 30px 0 20px 0;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+.special_info{
+    display: block;
+    padding: 100px 16px 0 16px;
+}
+
+.special_info_main{
+    text-align: center;
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    color: #6F88A0;
+}
+
+.special_info_second{
+    margin-top: 15px;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+}
+
+footer{
+    margin-top: 50px;
+}
+
+}
+
+@media (min-width: px) and (max-width:px){}
+@media (min-width: px) and (max-width:px){}
+
+/*
+        фикс первого поп-апа!!!
+        Свайпер
+*/
